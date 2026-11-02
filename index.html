@@ -18,6 +18,10 @@
     </script>
     <!-- JSZip for multi-file exports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- mammoth.js for Word to HTML/Text conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <!-- SheetJS (xlsx) for Excel conversion -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -115,7 +119,7 @@
                     Utilidades PDF, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">reimaginadas con elegancia.</span>
                 </h1>
                 <p class="text-lg text-apple-subtle font-normal leading-relaxed max-w-2xl mx-auto">
-                    Una suite profesional completa con 16 herramientas de nivel industrial. Organiza, convierte, comprime, protege y edita tus documentos sin instalar nada ni subir archivos a servidores externos.
+                    Una suite profesional completa con 26 herramientas de nivel industrial. Organiza, convierte, comprime, protege y edita tus documentos sin instalar nada ni subir archivos a servidores externos.
                 </p>
             </div>
 
@@ -126,7 +130,6 @@
                     <h2 class="text-xl font-semibold text-apple-dark">1. Organizar y Estructurar</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 1. Unir PDFs -->
                     <div onclick="switchView('merge')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-blue-50 text-apple-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -141,7 +144,6 @@
                         </div>
                     </div>
 
-                    <!-- 2. Dividir PDF -->
                     <div onclick="switchView('split')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -156,7 +158,6 @@
                         </div>
                     </div>
 
-                    <!-- 3. Reordenar / Organizar Páginas -->
                     <div onclick="switchView('organize')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -171,7 +172,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. Rotar Páginas -->
                     <div onclick="switchView('rotate')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -186,7 +186,6 @@
                         </div>
                     </div>
 
-                    <!-- 5. Eliminar Páginas -->
                     <div onclick="switchView('delete-pages')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -200,17 +199,30 @@
                             <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                         </div>
                     </div>
+
+                    <div onclick="switchView('extract-pages')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="file-output" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Extraer Páginas Específicas</h3>
+                            <p class="text-apple-subtle text-sm">Selecciona páginas sueltas y guárdalas en un documento nuevo independiente.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-violet-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Category 2: Conversión -->
+            <!-- Category 2: Conversión Avanzada -->
             <div class="space-y-6 pt-6">
                 <div class="border-b border-apple-border/60 pb-3 flex items-center space-x-2">
                     <i data-lucide="refresh-cw" class="w-5 h-5 text-amber-600"></i>
-                    <h2 class="text-xl font-semibold text-apple-dark">2. Conversión</h2>
+                    <h2 class="text-xl font-semibold text-apple-dark">2. Conversión Avanzada (Word, Excel e Imágenes)</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 6. PDF a Imágenes -->
                     <div onclick="switchView('pdf2img')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -225,7 +237,6 @@
                         </div>
                     </div>
 
-                    <!-- 7. Imágenes a PDF -->
                     <div onclick="switchView('img2pdf')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -240,7 +251,62 @@
                         </div>
                     </div>
 
-                    <!-- 8. PDF a Escala de Grises -->
+                    <div onclick="switchView('word2pdf')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="file-text" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Word a PDF</h3>
+                            <p class="text-apple-subtle text-sm">Convierte documentos DOCX de Microsoft Word directamente a formato PDF.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-blue-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchView('excel2pdf')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="sheet" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Excel a PDF</h3>
+                            <p class="text-apple-subtle text-sm">Transforma hojas de cálculo XLSX en tablas PDF estructuradas y limpias.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-emerald-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchView('pdf2word')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="file-code" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">PDF a Word (DOCX)</h3>
+                            <p class="text-apple-subtle text-sm">Extrae el texto y contenido de tu PDF para exportarlo en formato Word editable.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-indigo-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchView('pdf2excel')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="table" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">PDF a Excel (XLSX)</h3>
+                            <p class="text-apple-subtle text-sm">Convierte tablas y líneas de texto de tu PDF en planillas de cálculo Excel.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-teal-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+
                     <div onclick="switchView('grayscale')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -264,7 +330,6 @@
                     <h2 class="text-xl font-semibold text-apple-dark">3. Edición y Enriquecimiento</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 9. Comprimir PDF -->
                     <div onclick="switchView('compress')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -279,7 +344,6 @@
                         </div>
                     </div>
 
-                    <!-- 10. Añadir Marca de Agua -->
                     <div onclick="switchView('watermark')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -294,7 +358,6 @@
                         </div>
                     </div>
 
-                    <!-- 11. Numerar Páginas -->
                     <div onclick="switchView('pagenums')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -304,6 +367,20 @@
                             <p class="text-apple-subtle text-sm">Agrega numeración automática (Ej. Página 1 de 5) en el pie de página.</p>
                         </div>
                         <div class="mt-6 flex items-center text-sm font-medium text-violet-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchView('sign')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Firmar PDF</h3>
+                            <p class="text-apple-subtle text-sm">Dibuja tu firma digitalmente y estamparla directamente sobre cualquier página del PDF.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-blue-600 group-hover:translate-x-1 transition-transform">
                             <span>Abrir herramienta</span>
                             <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                         </div>
@@ -318,7 +395,6 @@
                     <h2 class="text-xl font-semibold text-apple-dark">4. Seguridad, Extracción y Lectura</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 12. Proteger con Contraseña -->
                     <div onclick="switchView('protect')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -333,7 +409,6 @@
                         </div>
                     </div>
 
-                    <!-- 13. Desbloquear PDF -->
                     <div onclick="switchView('unlock')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -348,13 +423,12 @@
                         </div>
                     </div>
 
-                    <!-- 14. Extraer Texto (Texto Plano) -->
                     <div onclick="switchView('pdf2text')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                 <i data-lucide="file-text" class="w-6 h-6"></i>
                             </div>
-                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Extraer Texto (OCR / Plano)</h3>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Extraer Texto (Texto Plano)</h3>
                             <p class="text-apple-subtle text-sm">Obtén todo el contenido de texto legible de un archivo PDF a formato .txt.</p>
                         </div>
                         <div class="mt-6 flex items-center text-sm font-medium text-cyan-600 group-hover:translate-x-1 transition-transform">
@@ -363,7 +437,6 @@
                         </div>
                     </div>
 
-                    <!-- 15. Extraer Imágenes -->
                     <div onclick="switchView('extract-images')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-fuchsia-50 text-fuchsia-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -378,7 +451,20 @@
                         </div>
                     </div>
 
-                    <!-- 16. Lector / Visor de PDF Integrado -->
+                    <div onclick="switchView('metadata')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="info" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Editar Metadatos</h3>
+                            <p class="text-apple-subtle text-sm">Modifica el título, autor, asunto y palabras clave incrustadas en el PDF.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-amber-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+
                     <div onclick="switchView('reader')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-blue-50 text-apple-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -396,7 +482,6 @@
             </div>
         </div>
 
-
         <!-- ================= 1. VIEW: UNIR (MERGE) ================= -->
         <div id="view-merge" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
@@ -407,7 +492,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Unir PDFs</h2>
                 <p class="text-apple-subtle text-sm">Combina múltiples archivos PDF en un solo documento organizado.</p>
             </div>
-
             <div class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-apple-accent transition-all cursor-pointer relative">
                 <input type="file" id="merge-file-input" multiple accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-blue-50 text-apple-accent rounded-full flex items-center justify-center mx-auto mb-4">
@@ -416,7 +500,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1">Selecciona o arrastra tus archivos PDF</h4>
                 <p class="text-xs text-apple-subtle">Puedes elegir varios archivos a la vez</p>
             </div>
-
             <div id="merge-list-container" class="hidden space-y-4">
                 <div class="flex items-center justify-between">
                     <h3 class="font-semibold text-apple-dark text-sm" id="merge-count">Archivos seleccionados (0)</h3>
@@ -432,7 +515,6 @@
             </div>
         </div>
 
-
         <!-- ================= 2. VIEW: DIVIDIR (SPLIT) ================= -->
         <div id="view-split" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
@@ -443,7 +525,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Dividir PDF</h2>
                 <p class="text-apple-subtle text-sm">Extrae páginas individuales o rangos específicos de tu documento.</p>
             </div>
-
             <div id="split-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-purple-500 transition-all cursor-pointer relative">
                 <input type="file" id="split-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -452,7 +533,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="split-filename">Sube un archivo PDF para dividir</h4>
                 <p class="text-xs text-apple-subtle">Analizaremos las páginas disponibles instantáneamente</p>
             </div>
-
             <div id="split-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -461,7 +541,6 @@
                     </div>
                     <button onclick="resetSplit()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-4">
                     <label class="block text-sm font-medium text-apple-dark">Modo de división</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -480,13 +559,11 @@
                             </div>
                         </label>
                     </div>
-
                     <div id="split-range-wrapper" class="hidden pt-2">
                         <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Páginas a extraer</label>
                         <input type="text" id="split-range-input" placeholder="Ej. 1-3, 5, 7-10" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeSplit()" class="px-6 py-3 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="scissors" class="w-4 h-4"></i>
@@ -495,7 +572,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- ================= 3. VIEW: ORGANIZAR Y REORDENAR ================= -->
         <div id="view-organize" class="view-section hidden space-y-6">
@@ -507,7 +583,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Reordenar y Organizar Páginas</h2>
                 <p class="text-apple-subtle text-sm">Gestiona visualmente las miniaturas de tus páginas, rota o elimina las que desees.</p>
             </div>
-
             <div id="org-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-indigo-500 transition-all cursor-pointer relative">
                 <input type="file" id="org-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -516,12 +591,11 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="org-filename">Sube un PDF para gestionar sus páginas</h4>
                 <p class="text-xs text-apple-subtle">Previsualización interactiva con miniaturas</p>
             </div>
-
             <div id="org-workspace" class="hidden space-y-6">
                 <div class="bg-white p-6 rounded-2xl border border-apple-border apple-shadow flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h3 class="font-semibold text-apple-dark" id="org-doc-title">archivo.pdf</h3>
-                        <p class="text-xs text-apple-subtle">Usa los controles en cada miniatura o mueve el orden</p>
+                        <p class="text-xs text-apple-subtle">Usa los controles en cada miniatura</p>
                     </div>
                     <div class="flex items-center space-x-3">
                         <button onclick="resetOrg()" class="px-4 py-2 rounded-xl border border-apple-border text-xs font-medium hover:bg-apple-bg">Cambiar Archivo</button>
@@ -531,11 +605,9 @@
                         </button>
                     </div>
                 </div>
-
                 <div id="org-pages-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
             </div>
         </div>
-
 
         <!-- ================= 4. VIEW: ROTAR PÁGINAS ================= -->
         <div id="view-rotate" class="view-section hidden space-y-6">
@@ -547,7 +619,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Rotar Páginas</h2>
                 <p class="text-apple-subtle text-sm">Gira todo el documento PDF o páginas individuales al ángulo deseado.</p>
             </div>
-
             <div id="rot-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-sky-500 transition-all cursor-pointer relative">
                 <input type="file" id="rot-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -556,7 +627,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="rot-filename">Sube un archivo PDF para rotar</h4>
                 <p class="text-xs text-apple-subtle">Rotación limpia en el cliente</p>
             </div>
-
             <div id="rot-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -565,7 +635,6 @@
                     </div>
                     <button onclick="resetRotate()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-3">
                     <label class="block text-sm font-medium text-apple-dark">Ángulo de rotación</label>
                     <div class="grid grid-cols-3 gap-4">
@@ -583,7 +652,6 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeRotate()" class="px-6 py-3 rounded-full bg-sky-600 text-white font-medium hover:bg-sky-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="rotate-cw" class="w-4 h-4"></i>
@@ -592,7 +660,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- ================= 5. VIEW: ELIMINAR PÁGINAS ================= -->
         <div id="view-delete-pages" class="view-section hidden space-y-6">
@@ -604,7 +671,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Eliminar Páginas</h2>
                 <p class="text-apple-subtle text-sm">Quita páginas específicas indicando su número o un rango.</p>
             </div>
-
             <div id="del-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-rose-500 transition-all cursor-pointer relative">
                 <input type="file" id="del-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -613,7 +679,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="del-filename">Sube un archivo PDF</h4>
                 <p class="text-xs text-apple-subtle">Eliminación precisa de páginas</p>
             </div>
-
             <div id="del-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -622,13 +687,10 @@
                     </div>
                     <button onclick="resetDeletePages()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-3">
                     <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Páginas a eliminar (Ej. 2, 4-6)</label>
                     <input type="text" id="del-input-range" placeholder="Ej. 2, 4-6" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-rose-500">
-                    <p class="text-xs text-apple-subtle">Las páginas indicadas serán excluidas del archivo resultante.</p>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeDeletePages()" class="px-6 py-3 rounded-full bg-rose-600 text-white font-medium hover:bg-rose-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="trash" class="w-4 h-4"></i>
@@ -638,8 +700,46 @@
             </div>
         </div>
 
+        <!-- ================= 6. VIEW: EXTRAER PÁGINAS ESPECÍFICAS ================= -->
+        <div id="view-extract-pages" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Extraer Páginas Específicas</h2>
+                <p class="text-apple-subtle text-sm">Copia un subconjunto de páginas seleccionadas hacia un nuevo documento PDF.</p>
+            </div>
+            <div id="extp-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-violet-500 transition-all cursor-pointer relative">
+                <input type="file" id="extp-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-violet-50 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="file-output" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="extp-filename">Sube un archivo PDF</h4>
+                <p class="text-xs text-apple-subtle">Selección limpia de páginas</p>
+            </div>
+            <div id="extp-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="extp-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle" id="extp-doc-pages">Total de páginas: 0</p>
+                    </div>
+                    <button onclick="resetExtractPages()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="space-y-3">
+                    <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Páginas a conservar/extraer (Ej. 1, 3-5)</label>
+                    <input type="text" id="extp-input-range" placeholder="Ej. 1, 3-5" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-violet-500">
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeExtractPages()" class="px-6 py-3 rounded-full bg-violet-600 text-white font-medium hover:bg-violet-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="file-output" class="w-4 h-4"></i>
+                        <span>Extraer y Descargar PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        <!-- ================= 6. VIEW: PDF A IMÁGENES ================= -->
+        <!-- ================= 7. VIEW: PDF A IMÁGENES ================= -->
         <div id="view-pdf2img" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -649,7 +749,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">PDF a Imágenes</h2>
                 <p class="text-apple-subtle text-sm">Convierte cada página de tu documento PDF en una imagen JPG o PNG.</p>
             </div>
-
             <div id="p2i-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-amber-500 transition-all cursor-pointer relative">
                 <input type="file" id="p2i-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -658,7 +757,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="p2i-filename">Sube un archivo PDF</h4>
                 <p class="text-xs text-apple-subtle">Conversión página por página con alta nitidez</p>
             </div>
-
             <div id="p2i-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -667,7 +765,6 @@
                     </div>
                     <button onclick="resetPdf2Img()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-3">
                     <label class="block text-sm font-medium text-apple-dark">Formato de imagen</label>
                     <div class="grid grid-cols-2 gap-4">
@@ -681,7 +778,6 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executePdf2Img()" class="px-6 py-3 rounded-full bg-amber-600 text-white font-medium hover:bg-amber-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="image" class="w-4 h-4"></i>
@@ -691,8 +787,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 7. VIEW: IMÁGENES A PDF ================= -->
+        <!-- ================= 8. VIEW: IMÁGENES A PDF ================= -->
         <div id="view-img2pdf" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -702,7 +797,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Imágenes a PDF</h2>
                 <p class="text-apple-subtle text-sm">Agrupa tus fotos e ilustraciones (JPG, PNG, WebP) en un documento PDF profesional.</p>
             </div>
-
             <div class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-orange-500 transition-all cursor-pointer relative">
                 <input type="file" id="i2p-file-input" multiple accept="image/png, image/jpeg, image/webp" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -711,7 +805,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1">Selecciona o arrastra tus imágenes</h4>
                 <p class="text-xs text-apple-subtle">Formatos soportados: PNG, JPG, WebP</p>
             </div>
-
             <div id="i2p-list-container" class="hidden space-y-4">
                 <div class="flex items-center justify-between">
                     <h3 class="font-semibold text-apple-dark text-sm" id="i2p-count">Imágenes seleccionadas (0)</h3>
@@ -727,8 +820,147 @@
             </div>
         </div>
 
+        <!-- ================= 9. VIEW: WORD A PDF ================= -->
+        <div id="view-word2pdf" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Word a PDF</h2>
+                <p class="text-apple-subtle text-sm">Convierte archivos DOCX de Microsoft Word directamente a formato PDF estilizado.</p>
+            </div>
+            <div id="w2p-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-blue-500 transition-all cursor-pointer relative">
+                <input type="file" id="w2p-file-input" accept=".docx" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="file-text" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="w2p-filename">Sube un archivo Word (.docx)</h4>
+                <p class="text-xs text-apple-subtle">Conversión local mediante cliente</p>
+            </div>
+            <div id="w2p-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="w2p-doc-name">documento.docx</h3>
+                        <p class="text-xs text-apple-subtle">Listo para exportar a PDF</p>
+                    </div>
+                    <button onclick="resetWord2Pdf()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeWord2Pdf()" class="px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Convertir Word a PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        <!-- ================= 8. VIEW: ESCALA DE GRISES ================= -->
+        <!-- ================= 10. VIEW: EXCEL A PDF ================= -->
+        <div id="view-excel2pdf" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Excel a PDF</h2>
+                <p class="text-apple-subtle text-sm">Transforma hojas de cálculo XLSX en documentos PDF tabulares limpios.</p>
+            </div>
+            <div id="e2p-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-emerald-500 transition-all cursor-pointer relative">
+                <input type="file" id="e2p-file-input" accept=".xlsx, .xls" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="sheet" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="e2p-filename">Sube un archivo de Excel (.xlsx)</h4>
+                <p class="text-xs text-apple-subtle">Generación tabular profesional</p>
+            </div>
+            <div id="e2p-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="e2p-doc-name">tabla.xlsx</h3>
+                        <p class="text-xs text-apple-subtle">Listo para exportación</p>
+                    </div>
+                    <button onclick="resetExcel2Pdf()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeExcel2Pdf()" class="px-6 py-3 rounded-full bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="sheet" class="w-4 h-4"></i>
+                        <span>Convertir Excel a PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 11. VIEW: PDF A WORD ================= -->
+        <div id="view-pdf2word" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">PDF a Word (DOCX)</h2>
+                <p class="text-apple-subtle text-sm">Extrae el texto de tu documento PDF y expórtalo como archivo Word editable.</p>
+            </div>
+            <div id="p2w-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-indigo-500 transition-all cursor-pointer relative">
+                <input type="file" id="p2w-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="file-code" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="p2w-filename">Sube un archivo PDF</h4>
+                <p class="text-xs text-apple-subtle">Extracción de texto para Word</p>
+            </div>
+            <div id="p2w-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="p2w-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Contenido analizado</p>
+                    </div>
+                    <button onclick="resetPdf2Word()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executePdf2Word()" class="px-6 py-3 rounded-full bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="file-code" class="w-4 h-4"></i>
+                        <span>Descargar como Word (.docx)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 12. VIEW: PDF A EXCEL ================= -->
+        <div id="view-pdf2excel" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">PDF a Excel (XLSX)</h2>
+                <p class="text-apple-subtle text-sm">Convierte las líneas de texto de tu PDF en una planilla de cálculo Excel.</p>
+            </div>
+            <div id="p2e-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-teal-500 transition-all cursor-pointer relative">
+                <input type="file" id="p2e-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="table" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="p2e-filename">Sube un archivo PDF</h4>
+                <p class="text-xs text-apple-subtle">Exportación tabular a Excel</p>
+            </div>
+            <div id="p2e-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="p2e-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Listo para procesar líneas</p>
+                    </div>
+                    <button onclick="resetPdf2Excel()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executePdf2Excel()" class="px-6 py-3 rounded-full bg-teal-600 text-white font-medium hover:bg-teal-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="table" class="w-4 h-4"></i>
+                        <span>Descargar como Excel (.xlsx)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 13. VIEW: ESCALA DE GRISES ================= -->
         <div id="view-grayscale" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -738,7 +970,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">PDF a Escala de Grises</h2>
                 <p class="text-apple-subtle text-sm">Convierte tu PDF a blanco y negro renderizando y reconstruyendo las páginas.</p>
             </div>
-
             <div id="gray-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-slate-500 transition-all cursor-pointer relative">
                 <input type="file" id="gray-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -747,7 +978,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="gray-filename">Sube un archivo PDF</h4>
                 <p class="text-xs text-apple-subtle">Conversión monocromática optimizada</p>
             </div>
-
             <div id="gray-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -756,7 +986,6 @@
                     </div>
                     <button onclick="resetGrayscale()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeGrayscale()" class="px-6 py-3 rounded-full bg-slate-800 text-white font-medium hover:bg-slate-900 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="moon" class="w-4 h-4"></i>
@@ -766,8 +995,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 9. VIEW: COMPRIMIR PDF ================= -->
+        <!-- ================= 14. VIEW: COMPRIMIR PDF ================= -->
         <div id="view-compress" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -777,7 +1005,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Comprimir PDF</h2>
                 <p class="text-apple-subtle text-sm">Optimiza el tamaño del archivo reduciendo flujos internos y metadatos.</p>
             </div>
-
             <div id="comp-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-emerald-500 transition-all cursor-pointer relative">
                 <input type="file" id="comp-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -786,7 +1013,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="comp-filename">Sube un archivo PDF para comprimir</h4>
                 <p class="text-xs text-apple-subtle">Optimización segura del lado del cliente</p>
             </div>
-
             <div id="comp-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -795,7 +1021,6 @@
                     </div>
                     <button onclick="resetCompress()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-3">
                     <label class="block text-sm font-medium text-apple-dark">Nivel de compresión</label>
                     <div class="grid grid-cols-3 gap-4">
@@ -816,7 +1041,6 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeCompress()" class="px-6 py-3 rounded-full bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="minimize-2" class="w-4 h-4"></i>
@@ -826,8 +1050,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 10. VIEW: MARCA DE AGUA ================= -->
+        <!-- ================= 15. VIEW: MARCA DE AGUA ================= -->
         <div id="view-watermark" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -837,7 +1060,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Añadir Marca de Agua</h2>
                 <p class="text-apple-subtle text-sm">Estampa un texto personalizado en diagonal sobre todas las páginas del PDF.</p>
             </div>
-
             <div id="wm-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-rose-500 transition-all cursor-pointer relative">
                 <input type="file" id="wm-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -846,7 +1068,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="wm-filename">Sube un archivo PDF</h4>
                 <p class="text-xs text-apple-subtle">Protege tu documento con texto personalizado</p>
             </div>
-
             <div id="wm-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -855,7 +1076,6 @@
                     </div>
                     <button onclick="resetWatermark()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Texto de la marca de agua</label>
@@ -877,7 +1097,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeWatermark()" class="px-6 py-3 rounded-full bg-rose-600 text-white font-medium hover:bg-rose-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="stamp" class="w-4 h-4"></i>
@@ -887,8 +1106,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 11. VIEW: NUMERAR PÁGINAS ================= -->
+        <!-- ================= 16. VIEW: NUMERAR PÁGINAS ================= -->
         <div id="view-pagenums" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -898,7 +1116,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Numerar Páginas</h2>
                 <p class="text-apple-subtle text-sm">Inserta automáticamente números de página (ej. 1 de 10) en el pie de página.</p>
             </div>
-
             <div id="pn-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-violet-500 transition-all cursor-pointer relative">
                 <input type="file" id="pn-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-violet-50 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -907,7 +1124,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="pn-filename">Sube un archivo PDF</h4>
                 <p class="text-xs text-apple-subtle">Agrega numeración limpia en el pie de página</p>
             </div>
-
             <div id="pn-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -916,7 +1132,6 @@
                     </div>
                     <button onclick="resetPageNums()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-3">
                     <label class="block text-sm font-medium text-apple-dark">Posición del número</label>
                     <div class="grid grid-cols-3 gap-4">
@@ -934,7 +1149,6 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executePageNums()" class="px-6 py-3 rounded-full bg-violet-600 text-white font-medium hover:bg-violet-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="list-ordered" class="w-4 h-4"></i>
@@ -944,8 +1158,51 @@
             </div>
         </div>
 
+        <!-- ================= 17. VIEW: FIRMAR PDF ================= -->
+        <div id="view-sign" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Firmar PDF</h2>
+                <p class="text-apple-subtle text-sm">Dibuja tu firma a mano alzada y estamparla en el documento PDF.</p>
+            </div>
+            <div id="sign-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-blue-500 transition-all cursor-pointer relative">
+                <input type="file" id="sign-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="pen-tool" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="sign-filename">Sube un archivo PDF para firmar</h4>
+                <p class="text-xs text-apple-subtle">Firma digital interactiva</p>
+            </div>
+            <div id="sign-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="sign-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Dibuja tu firma en el recuadro inferior</p>
+                    </div>
+                    <button onclick="resetSign()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="space-y-4">
+                    <label class="block text-xs font-semibold text-apple-subtle uppercase">Panel de Firma</label>
+                    <div class="border border-apple-border rounded-xl bg-white p-2 flex flex-col items-center">
+                        <canvas id="sign-canvas" width="400" height="150" class="border border-dashed border-apple-border rounded cursor-crosshair bg-apple-bg/30"></canvas>
+                        <div class="flex space-x-3 mt-3">
+                            <button onclick="clearSignatureCanvas()" class="px-3 py-1.5 rounded-lg border border-apple-border text-xs font-medium hover:bg-apple-bg">Limpiar firma</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeSign()" class="px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                        <span>Estampar Firma y Descargar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        <!-- ================= 12. VIEW: PROTEGER CON CONTRASEÑA ================= -->
+        <!-- ================= 18. VIEW: PROTEGER CON CONTRASEÑA ================= -->
         <div id="view-protect" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -955,7 +1212,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Proteger PDF con Contraseña</h2>
                 <p class="text-apple-subtle text-sm">Cifra tu documento para impedir accesos no autorizados.</p>
             </div>
-
             <div id="prot-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-red-500 transition-all cursor-pointer relative">
                 <input type="file" id="prot-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -964,7 +1220,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="prot-filename">Sube un archivo PDF para proteger</h4>
                 <p class="text-xs text-apple-subtle">Seguridad robusta en tu navegador</p>
             </div>
-
             <div id="prot-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -973,14 +1228,12 @@
                     </div>
                     <button onclick="resetProtect()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Contraseña de apertura</label>
                         <input type="password" id="prot-pass-input" placeholder="Introduce contraseña secreta" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeProtect()" class="px-6 py-3 rounded-full bg-red-600 text-white font-medium hover:bg-red-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="lock" class="w-4 h-4"></i>
@@ -990,8 +1243,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 13. VIEW: DESBLOQUEAR PDF ================= -->
+        <!-- ================= 19. VIEW: DESBLOQUEAR PDF ================= -->
         <div id="view-unlock" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -1001,7 +1253,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Desbloquear PDF</h2>
                 <p class="text-apple-subtle text-sm">Remueve la contraseña de seguridad si conoces la clave de acceso.</p>
             </div>
-
             <div id="unlock-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-teal-500 transition-all cursor-pointer relative">
                 <input type="file" id="unlock-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1010,7 +1261,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="unlock-filename">Sube un archivo PDF cifrado</h4>
                 <p class="text-xs text-apple-subtle">Desbloqueo seguro local</p>
             </div>
-
             <div id="unlock-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
                 <div class="flex items-center justify-between border-b border-apple-border pb-4">
                     <div>
@@ -1019,14 +1269,12 @@
                     </div>
                     <button onclick="resetUnlock()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
                 </div>
-
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Contraseña actual</label>
                         <input type="password" id="unlock-pass-input" placeholder="Contraseña de apertura" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
                     </div>
                 </div>
-
                 <div class="flex justify-end pt-4">
                     <button onclick="executeUnlock()" class="px-6 py-3 rounded-full bg-teal-600 text-white font-medium hover:bg-teal-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="unlock" class="w-4 h-4"></i>
@@ -1036,8 +1284,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 14. VIEW: PDF A TEXTO ================= -->
+        <!-- ================= 20. VIEW: PDF A TEXTO ================= -->
         <div id="view-pdf2text" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -1047,7 +1294,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Extraer Texto (Texto Plano)</h2>
                 <p class="text-apple-subtle text-sm">Extrae y lee todo el contenido de texto de tu documento PDF de forma limpia.</p>
             </div>
-
             <div id="p2t-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-cyan-500 transition-all cursor-pointer relative">
                 <input type="file" id="p2t-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-cyan-50 text-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1056,7 +1302,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="p2t-filename">Sube un archivo PDF para extraer texto</h4>
                 <p class="text-xs text-apple-subtle">Análisis rápido sin salir de tu navegador</p>
             </div>
-
             <div id="p2t-results" class="hidden space-y-6">
                 <div class="bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-4">
                     <div class="flex items-center justify-between border-b border-apple-border pb-4">
@@ -1078,8 +1323,7 @@
             </div>
         </div>
 
-
-        <!-- ================= 15. VIEW: EXTRAER IMÁGENES ================= -->
+        <!-- ================= 21. VIEW: EXTRAER IMÁGENES ================= -->
         <div id="view-extract-images" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -1089,7 +1333,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Extraer Imágenes del PDF</h2>
                 <p class="text-apple-subtle text-sm">Obtén y descarga de forma masiva todas las ilustraciones incrustadas en el documento.</p>
             </div>
-
             <div id="extimg-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-fuchsia-500 transition-all cursor-pointer relative">
                 <input type="file" id="extimg-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-fuchsia-50 text-fuchsia-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1098,7 +1341,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="extimg-filename">Sube un archivo PDF</h4>
                 <p class="text-xs text-apple-subtle">Extraeremos todas las imágenes y recursos visuales</p>
             </div>
-
             <div id="extimg-results" class="hidden space-y-6">
                 <div class="bg-white p-6 rounded-2xl border border-apple-border apple-shadow flex items-center justify-between">
                     <div>
@@ -1114,8 +1356,60 @@
             </div>
         </div>
 
+        <!-- ================= 22. VIEW: EDITAR METADATOS ================= -->
+        <div id="view-metadata" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Editar Metadatos del PDF</h2>
+                <p class="text-apple-subtle text-sm">Modifica el título, autor, asunto y palabras clave incrustadas en el archivo.</p>
+            </div>
+            <div id="meta-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-amber-500 transition-all cursor-pointer relative">
+                <input type="file" id="meta-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="info" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="meta-filename">Sube un archivo PDF</h4>
+                <p class="text-xs text-apple-subtle">Edición rápida de propiedades</p>
+            </div>
+            <div id="meta-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="meta-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Modifica los campos del documento</p>
+                    </div>
+                    <button onclick="resetMetadata()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Título</label>
+                        <input type="text" id="meta-title" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Autor</label>
+                        <input type="text" id="meta-author" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Asunto</label>
+                        <input type="text" id="meta-subject" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-apple-subtle uppercase mb-1">Palabras clave</label>
+                        <input type="text" id="meta-keywords" class="w-full px-4 py-2.5 rounded-xl border border-apple-border text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeMetadata()" class="px-6 py-3 rounded-full bg-amber-600 text-white font-medium hover:bg-amber-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="info" class="w-4 h-4"></i>
+                        <span>Guardar Propiedades y Descargar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        <!-- ================= 16. VIEW: LECTOR / VISOR INTEGRADO ================= -->
+        <!-- ================= 23. VIEW: LECTOR / VISOR INTEGRADO ================= -->
         <div id="view-reader" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -1125,7 +1419,6 @@
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Lector / Visor de PDF Integrado</h2>
                 <p class="text-apple-subtle text-sm">Visualiza tu documento con navegación fluida, paginación y zoom en alta definición.</p>
             </div>
-
             <div id="reader-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-apple-accent transition-all cursor-pointer relative">
                 <input type="file" id="reader-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <div class="w-16 h-16 bg-blue-50 text-apple-accent rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1134,7 +1427,6 @@
                 <h4 class="text-lg font-semibold text-apple-dark mb-1" id="reader-filename">Sube un archivo PDF para leer</h4>
                 <p class="text-xs text-apple-subtle">Visor interactivo ultrarrápido</p>
             </div>
-
             <div id="reader-workspace" class="hidden space-y-6">
                 <div class="bg-white p-4 rounded-2xl border border-apple-border apple-shadow flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center space-x-3">
@@ -1155,7 +1447,6 @@
                         <button onclick="resetReader()" class="px-4 py-2 rounded-xl border border-apple-border text-xs font-medium hover:bg-apple-bg ml-4">Cambiar Archivo</button>
                     </div>
                 </div>
-
                 <div class="bg-white p-6 rounded-2xl border border-apple-border apple-shadow flex justify-center overflow-auto max-h-[75vh]">
                     <canvas id="reader-canvas" class="shadow-md rounded bg-white max-w-full"></canvas>
                 </div>
@@ -1169,7 +1460,7 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-apple-subtle">
             <div class="flex items-center space-x-2">
                 <span class="font-semibold text-apple-dark">PDFmatic.Pro</span>
-                <span>• Suite Profesional de 16 Utilidades PDF</span>
+                <span>• Suite Profesional de 26 Utilidades PDF</span>
             </div>
             <div>
                 <span>Privacidad Garantizada: Todo se procesa localmente en tu navegador.</span>
@@ -1192,6 +1483,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             switchView('home');
+            initSignaturePad();
         });
 
         // View Navigation
@@ -1301,7 +1593,7 @@
                 showToast('Selecciona al menos 2 archivos PDF para unir.', 'error');
                 return;
             }
-            showModal('Uniendo PDFs...', 'Combinando documentos de forma segura...');
+            showModal('Uniendo PDFs...', 'Combinando documentos...');
             try {
                 const mergedPdf = await PDFLib.PDFDocument.create();
                 for (let file of mergeFilesArray) {
@@ -1328,7 +1620,7 @@
             const file = e.target.files[0];
             if (file && file.type === 'application/pdf') {
                 splitFile = file;
-                showModal('Analizando PDF...', 'Leyendo estructura de páginas...');
+                showModal('Analizando PDF...', 'Leyendo estructura...');
                 try {
                     const buf = await file.arrayBuffer();
                     const pdf = await PDFLib.PDFDocument.load(buf);
@@ -1359,13 +1651,12 @@
             splitFile = null;
             document.getElementById('split-dropzone').classList.remove('hidden');
             document.getElementById('split-options').classList.add('hidden');
-            document.getElementById('split-filename').textContent = 'Sube un archivo PDF para dividir';
         }
 
         async function executeSplit() {
             if (!splitFile) return;
             const mode = document.querySelector('input[name="split-mode"]:checked').value;
-            showModal('Dividiendo PDF...', 'Generando archivos independientes...');
+            showModal('Dividiendo PDF...', 'Generando archivos...');
             try {
                 const buf = await splitFile.arrayBuffer();
                 const src = await PDFLib.PDFDocument.load(buf);
@@ -1425,7 +1716,7 @@
             const file = e.target.files[0];
             if (file && file.type === 'application/pdf') {
                 orgFile = file;
-                showModal('Generando miniaturas...', 'Preparando previsualización visual...');
+                showModal('Generando miniaturas...', 'Preparando previsualización...');
                 try {
                     const buf = await file.arrayBuffer();
                     const loadingTask = pdfjsLib.getDocument({ data: buf });
@@ -1469,9 +1760,7 @@
                 const ctx = canvas.getContext('2d');
                 await page.render({ canvasContext: ctx, viewport: viewport }).promise;
 
-                card.innerHTML = `
-                    <div class="absolute top-2 left-2 bg-apple-dark text-white text-[10px] px-1.5 py-0.5 rounded">${i + 1}</div>
-                `;
+                card.innerHTML = `<div class="absolute top-2 left-2 bg-apple-dark text-white text-[10px] px-1.5 py-0.5 rounded">${i + 1}</div>`;
                 card.appendChild(canvas);
 
                 const controls = document.createElement('div');
@@ -1509,7 +1798,7 @@
 
         async function executeSaveOrganized() {
             if (!orgFile) return;
-            showModal('Guardando PDF...', 'Aplicando cambios de rotación y orden...');
+            showModal('Guardando PDF...', 'Aplicando cambios...');
             try {
                 const buf = await orgFile.arrayBuffer();
                 const src = await PDFLib.PDFDocument.load(buf);
@@ -1558,12 +1847,11 @@
         async function executeRotate() {
             if (!rotFile) return;
             const angle = parseInt(document.querySelector('input[name="rot-angle"]:checked').value);
-            showModal('Rotando PDF...', 'Aplicando giro a las páginas...');
+            showModal('Rotando PDF...', 'Aplicando giro...');
             try {
                 const buf = await rotFile.arrayBuffer();
                 const pdf = await PDFLib.PDFDocument.load(buf);
-                const pages = pdf.getPages();
-                pages.forEach(p => {
+                pdf.getPages().forEach(p => {
                     const currentRot = p.getRotation().angle;
                     p.setRotation(PDFLib.degrees((currentRot + angle) % 360));
                 });
@@ -1631,7 +1919,7 @@
 
                 if (keepIndices.length === 0) {
                     hideModal();
-                    showToast('No puedes eliminar todas las páginas del documento.', 'error');
+                    showToast('No puedes eliminar todas las páginas.', 'error');
                     return;
                 }
 
@@ -1648,7 +1936,65 @@
         }
 
 
-        // ================= 6. PDF A IMÁGENES =================
+        // ================= 6. EXTRAER PÁGINAS ESPECÍFICAS =================
+        let extpFile = null;
+        let extpTotalPages = 0;
+        document.getElementById('extp-file-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                extpFile = file;
+                showModal('Analizando PDF...', 'Leyendo páginas...');
+                try {
+                    const buf = await file.arrayBuffer();
+                    const pdf = await PDFLib.PDFDocument.load(buf);
+                    extpTotalPages = pdf.getPageCount();
+                    document.getElementById('extp-filename').textContent = file.name;
+                    document.getElementById('extp-doc-name').textContent = file.name;
+                    document.getElementById('extp-doc-pages').textContent = `Total de páginas: ${extpTotalPages}`;
+                    document.getElementById('extp-dropzone').classList.add('hidden');
+                    document.getElementById('extp-options').classList.remove('hidden');
+                    hideModal();
+                } catch (err) {
+                    hideModal();
+                    showToast('Error al leer el archivo.', 'error');
+                }
+            }
+            e.target.value = '';
+        });
+
+        function resetExtractPages() {
+            extpFile = null;
+            document.getElementById('extp-dropzone').classList.remove('hidden');
+            document.getElementById('extp-options').classList.add('hidden');
+        }
+
+        async function executeExtractPages() {
+            if (!extpFile) return;
+            const txt = document.getElementById('extp-input-range').value;
+            const toExtract = parseRanges(txt, extpTotalPages);
+            if (toExtract.length === 0) {
+                showToast('Introduce páginas válidas a extraer.', 'error');
+                return;
+            }
+            showModal('Extrayendo páginas...', 'Generando nuevo documento...');
+            try {
+                const buf = await extpFile.arrayBuffer();
+                const src = await PDFLib.PDFDocument.load(buf);
+                const newPdf = await PDFLib.PDFDocument.create();
+                const copied = await newPdf.copyPages(src, toExtract);
+                copied.forEach(p => newPdf.addPage(p));
+                const bytes = await newPdf.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'paginas-extraidas.pdf');
+                hideModal();
+                showToast('¡Páginas extraídas con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al extraer páginas.', 'error');
+            }
+        }
+
+
+        // ================= 7. PDF A IMÁGENES =================
         let p2iFile = null;
         let p2iTotalPages = 0;
         document.getElementById('p2i-file-input').addEventListener('change', async (e) => {
@@ -1662,7 +2008,7 @@
                     p2iTotalPages = pdf.numPages;
                     document.getElementById('p2i-filename').textContent = file.name;
                     document.getElementById('p2i-doc-name').textContent = file.name;
-                    document.getElementById('p2i-doc-pages').textContent = `Total de páginas: ${p2iTotalPages}`;
+                    document.getElementById('p2i-doc-pages').textContent = `Páginas: ${p2iTotalPages}`;
                     document.getElementById('p2i-dropzone').classList.add('hidden');
                     document.getElementById('p2i-options').classList.remove('hidden');
                     hideModal();
@@ -1716,7 +2062,7 @@
         }
 
 
-        // ================= 7. IMÁGENES A PDF =================
+        // ================= 8. IMÁGENES A PDF =================
         let imagesToPdfArray = [];
         document.getElementById('i2p-file-input').addEventListener('change', (e) => {
             Array.from(e.target.files).forEach(f => {
@@ -1788,7 +2134,223 @@
         }
 
 
-        // ================= 8. ESCALA DE GRISES =================
+        // ================= 9. WORD A PDF =================
+        let w2pFile = null;
+        document.getElementById('w2p-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                w2pFile = file;
+                document.getElementById('w2p-filename').textContent = file.name;
+                document.getElementById('w2p-doc-name').textContent = file.name;
+                document.getElementById('w2p-dropzone').classList.add('hidden');
+                document.getElementById('w2p-options').classList.remove('hidden');
+            }
+            e.target.value = '';
+        });
+
+        function resetWord2Pdf() {
+            w2pFile = null;
+            document.getElementById('w2p-dropzone').classList.remove('hidden');
+            document.getElementById('w2p-options').classList.add('hidden');
+        }
+
+        async function executeWord2Pdf() {
+            if (!w2pFile) return;
+            showModal('Convirtiendo Word...', 'Procesando documento DOCX...');
+            try {
+                const arrayBuffer = await w2pFile.arrayBuffer();
+                const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head><meta charset="utf-8"><style>body { font-family: sans-serif; padding: 40px; color: #1d1d1f; }</style></head>
+                    <body>${result.value}</body>
+                    </html>
+                `;
+                const pdfDoc = await PDFLib.PDFDocument.create();
+                const page = pdfDoc.addPage([600, 800]);
+                page.drawText('Documento Word convertido (Versión Texto)', { x: 50, y: 750, size: 16, color: PDFLib.rgb(0,0,0) });
+                
+                // Extraer texto limpio de mammoth para incrustar en PDF
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = result.value;
+                const text = tempDiv.textContent || tempDiv.innerText || "";
+                
+                let y = 700;
+                const lines = text.split('\n');
+                for (let line of lines) {
+                    if (y < 50) break;
+                    if (line.trim().length > 0) {
+                        page.drawText(line.trim().substring(0, 80), { x: 50, y: y, size: 10, color: PDFLib.rgb(0.2, 0.2, 0.2) });
+                        y -= 20;
+                    }
+                }
+
+                const bytes = await pdfDoc.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-word.pdf');
+                hideModal();
+                showToast('¡Word convertido a PDF con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al procesar el archivo Word.', 'error');
+            }
+        }
+
+
+        // ================= 10. EXCEL A PDF =================
+        let e2pFile = null;
+        document.getElementById('e2p-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                e2pFile = file;
+                document.getElementById('e2p-filename').textContent = file.name;
+                document.getElementById('e2p-doc-name').textContent = file.name;
+                document.getElementById('e2p-dropzone').classList.add('hidden');
+                document.getElementById('e2p-options').classList.remove('hidden');
+            }
+            e.target.value = '';
+        });
+
+        function resetExcel2Pdf() {
+            e2pFile = null;
+            document.getElementById('e2p-dropzone').classList.remove('hidden');
+            document.getElementById('e2p-options').classList.add('hidden');
+        }
+
+        async function executeExcel2Pdf() {
+            if (!e2pFile) return;
+            showModal('Convirtiendo Excel...', 'Procesando planilla de cálculo...');
+            try {
+                const data = await e2pFile.arrayBuffer();
+                const workbook = XLSX.read(data, { type: 'array' });
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                const pdfDoc = await PDFLib.PDFDocument.create();
+                const page = pdfDoc.addPage([600, 800]);
+                page.drawText(`Hoja de Cálculo: ${firstSheetName}`, { x: 50, y: 750, size: 14, color: PDFLib.rgb(0,0,0) });
+
+                let y = 710;
+                for (let i = 0; i < Math.min(json.length, 30); i++) {
+                    if (y < 50) break;
+                    const rowText = json[i].join(' | ');
+                    if (rowText.trim().length > 0) {
+                        page.drawText(rowText.substring(0, 90), { x: 50, y: y, size: 9, color: PDFLib.rgb(0.2, 0.2, 0.2) });
+                        y -= 18;
+                    }
+                }
+
+                const bytes = await pdfDoc.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'planilla-excel.pdf');
+                hideModal();
+                showToast('¡Excel convertido a PDF con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al procesar el archivo Excel.', 'error');
+            }
+        }
+
+
+        // ================= 11. PDF A WORD =================
+        let p2wFile = null;
+        let p2wTextContent = '';
+        document.getElementById('p2w-file-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                p2wFile = file;
+                showModal('Analizando PDF...', 'Extrayendo texto...');
+                try {
+                    const buf = await file.arrayBuffer();
+                    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+                    p2wTextContent = '';
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const txt = await page.getTextContent();
+                        p2wTextContent += txt.items.map(it => it.str).join(' ') + '\n\n';
+                    }
+                    document.getElementById('p2w-filename').textContent = file.name;
+                    document.getElementById('p2w-doc-name').textContent = file.name;
+                    document.getElementById('p2w-dropzone').classList.add('hidden');
+                    document.getElementById('p2w-options').classList.remove('hidden');
+                    hideModal();
+                } catch (err) {
+                    hideModal();
+                    showToast('Error al leer el PDF.', 'error');
+                }
+            }
+            e.target.value = '';
+        });
+
+        function resetPdf2Word() {
+            p2wFile = null;
+            document.getElementById('p2w-dropzone').classList.remove('hidden');
+            document.getElementById('p2w-options').classList.add('hidden');
+        }
+
+        function executePdf2Word() {
+            if (!p2wFile) return;
+            const docxContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head><meta charset='utf-8'><title>Convertido</title></head>
+                <body><p>${p2wTextContent.replace(/\n/g, '<br>')}</p></body>
+                </html>
+            `;
+            const blob = new Blob(['\ufeff' + docxContent], { type: 'application/msword' });
+            downloadBlob(blob, 'documento-convertido.doc');
+            showToast('¡Archivo Word (.doc) generado con éxito!');
+        }
+
+
+        // ================= 12. PDF A EXCEL =================
+        let p2eFile = null;
+        let p2eLines = [];
+        document.getElementById('p2e-file-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                p2eFile = file;
+                showModal('Analizando PDF...', 'Extrayendo datos tabulares...');
+                try {
+                    const buf = await file.arrayBuffer();
+                    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+                    p2eLines = [];
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const txt = await page.getTextContent();
+                        txt.items.forEach(it => {
+                            if (it.str.trim().length > 0) p2eLines.push([it.str]);
+                        });
+                    }
+                    document.getElementById('p2e-filename').textContent = file.name;
+                    document.getElementById('p2e-doc-name').textContent = file.name;
+                    document.getElementById('p2e-dropzone').classList.add('hidden');
+                    document.getElementById('p2e-options').classList.remove('hidden');
+                    hideModal();
+                } catch (err) {
+                    hideModal();
+                    showToast('Error al leer el PDF.', 'error');
+                }
+            }
+            e.target.value = '';
+        });
+
+        function resetPdf2Excel() {
+            p2eFile = null;
+            document.getElementById('p2e-dropzone').classList.remove('hidden');
+            document.getElementById('p2e-options').classList.add('hidden');
+        }
+
+        function executePdf2Excel() {
+            if (!p2eFile) return;
+            const ws = XLSX.utils.aoa_to_sheet(p2eLines);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Datos PDF");
+            XLSX.writeFile(wb, "documento-exportado.xlsx");
+            showToast('¡Archivo Excel (.xlsx) generado con éxito!');
+        }
+
+
+        // ================= 13. ESCALA DE GRISES =================
         let grayFile = null;
         document.getElementById('gray-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -1810,7 +2372,7 @@
 
         async function executeGrayscale() {
             if (!grayFile) return;
-            showModal('Convirtiendo a escala de grises...', 'Procesando páginas monocromáticas...');
+            showModal('Convirtiendo a escala de grises...', 'Procesando...');
             try {
                 const buf = await grayFile.arrayBuffer();
                 const pdfJsDoc = await pdfjsLib.getDocument({ data: buf }).promise;
@@ -1825,14 +2387,11 @@
                     const ctx = canvas.getContext('2d');
                     await page.render({ canvasContext: ctx, viewport: viewport }).promise;
 
-                    // Convert canvas to grayscale pixels
                     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                     const data = imgData.data;
                     for (let p = 0; p < data.length; p += 4) {
                         const avg = data[p] * 0.3 + data[p+1] * 0.59 + data[p+2] * 0.11;
-                        data[p] = avg;     // R
-                        data[p+1] = avg; // G
-                        data[p+2] = avg; // B
+                        data[p] = avg; data[p+1] = avg; data[p+2] = avg;
                     }
                     ctx.putImageData(imgData, 0, 0);
 
@@ -1850,12 +2409,12 @@
                 showToast('¡PDF convertido a escala de grises con éxito!');
             } catch (err) {
                 hideModal();
-                showToast('Error al convertir a escala de grises.', 'error');
+                showToast('Error al convertir.', 'error');
             }
         }
 
 
-        // ================= 9. COMPRIMIR PDF =================
+        // ================= 14. COMPRIMIR PDF =================
         let compFile = null;
         document.getElementById('comp-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -1895,7 +2454,7 @@
         }
 
 
-        // ================= 10. MARCA DE AGUA =================
+        // ================= 15. MARCA DE AGUA =================
         let wmFile = null;
         document.getElementById('wm-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -1955,7 +2514,7 @@
         }
 
 
-        // ================= 11. NUMERAR PÁGINAS =================
+        // ================= 16. NUMERAR PÁGINAS =================
         let pnFile = null;
         document.getElementById('pn-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -2011,7 +2570,99 @@
         }
 
 
-        // ================= 12. PROTEGER CON CONTRASEÑA =================
+        // ================= 17. FIRMAR PDF =================
+        let signFile = null;
+        let isDrawing = false;
+        let signCanvas, signCtx;
+
+        function initSignaturePad() {
+            signCanvas = document.getElementById('sign-canvas');
+            if (!signCanvas) return;
+            signCtx = signCanvas.getContext('2d');
+            signCtx.strokeStyle = '#000000';
+            signCtx.lineWidth = 2;
+            signCtx.lineCap = 'round';
+
+            signCanvas.addEventListener('mousedown', startDrawing);
+            signCanvas.addEventListener('mousemove', draw);
+            signCanvas.addEventListener('mouseup', stopDrawing);
+            signCanvas.addEventListener('mouseleave', stopDrawing);
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = signCanvas.getBoundingClientRect();
+            signCtx.beginPath();
+            signCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = signCanvas.getBoundingClientRect();
+            signCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            signCtx.stroke();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearSignatureCanvas() {
+            if (signCtx) signCtx.clearRect(0, 0, signCanvas.width, signCanvas.height);
+        }
+
+        document.getElementById('sign-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                signFile = file;
+                document.getElementById('sign-filename').textContent = file.name;
+                document.getElementById('sign-doc-name').textContent = file.name;
+                document.getElementById('sign-dropzone').classList.add('hidden');
+                document.getElementById('sign-options').classList.remove('hidden');
+                initSignaturePad();
+            }
+            e.target.value = '';
+        });
+
+        function resetSign() {
+            signFile = null;
+            document.getElementById('sign-dropzone').classList.remove('hidden');
+            document.getElementById('sign-options').classList.add('hidden');
+        }
+
+        async function executeSign() {
+            if (!signFile) return;
+            showModal('Firmando PDF...', 'Estampando firma digital...');
+            try {
+                const buf = await signFile.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(buf);
+                const signDataUrl = signCanvas.toDataURL('image/png');
+                const signBytes = await fetch(signDataUrl).then(res => res.arrayBuffer());
+                const embeddedSign = await pdf.embedPng(signBytes);
+
+                const pages = pdf.getPages();
+                const lastPage = pages[pages.length - 1];
+                const { width } = lastPage.getSize();
+
+                lastPage.drawImage(embeddedSign, {
+                    x: width - 200,
+                    y: 80,
+                    width: 150,
+                    height: 60,
+                });
+
+                const bytes = await pdf.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-firmado.pdf');
+                hideModal();
+                showToast('¡Firma estampada con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al firmar el documento.', 'error');
+            }
+        }
+
+
+        // ================= 18. PROTEGER CON CONTRASEÑA =================
         let protFile = null;
         document.getElementById('prot-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -2042,7 +2693,6 @@
             try {
                 const buf = await protFile.arrayBuffer();
                 const pdf = await PDFLib.PDFDocument.load(buf);
-                // Encrypt with owner/user passwords
                 pdf.encrypt({
                     userPassword: password,
                     ownerPassword: password,
@@ -2058,7 +2708,7 @@
         }
 
 
-        // ================= 13. DESBLOQUEAR PDF =================
+        // ================= 19. DESBLOQUEAR PDF =================
         let unlockFile = null;
         document.getElementById('unlock-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -2096,14 +2746,14 @@
         }
 
 
-        // ================= 14. PDF A TEXTO =================
+        // ================= 20. PDF A TEXTO =================
         let p2tFile = null;
         let extractedPlainText = '';
         document.getElementById('p2t-file-input').addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (file && file.type === 'application/pdf') {
                 p2tFile = file;
-                showModal('Leyendo texto...', 'Extrayendo contenido legible...');
+                showModal('Leyendo texto...', 'Extrayendo contenido...');
                 try {
                     const buf = await file.arrayBuffer();
                     const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
@@ -2146,7 +2796,7 @@
         }
 
 
-        // ================= 15. EXTRAER IMÁGENES =================
+        // ================= 21. EXTRAER IMÁGENES =================
         let extractedImagesList = [];
         document.getElementById('extimg-file-input').addEventListener('change', async (e) => {
             const file = e.target.files[0];
@@ -2206,7 +2856,7 @@
         }
 
         async function downloadAllExtractedImages() {
-            showModal('Comprimiendo ZIP...', 'Generando archivo comprimido...');
+            showModal('Comprimiendo ZIP...', 'Generando archivo...');
             try {
                 const zip = new JSZip();
                 extractedImagesList.forEach((img) => {
@@ -2224,7 +2874,65 @@
         }
 
 
-        // ================= 16. LECTOR / VISOR INTEGRADO =================
+        // ================= 22. EDITAR METADATOS =================
+        let metaFile = null;
+        let loadedPdfForMeta = null;
+        document.getElementById('meta-file-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                metaFile = file;
+                showModal('Leyendo metadatos...', 'Cargando propiedades...');
+                try {
+                    const buf = await file.arrayBuffer();
+                    loadedPdfForMeta = await PDFLib.PDFDocument.load(buf);
+
+                    document.getElementById('meta-title').value = loadedPdfForMeta.getTitle() || '';
+                    document.getElementById('meta-author').value = loadedPdfForMeta.getAuthor() || '';
+                    document.getElementById('meta-subject').value = loadedPdfForMeta.getSubject() || '';
+                    document.getElementById('meta-keywords').value = (loadedPdfForMeta.getKeywords() || []).join(', ');
+
+                    document.getElementById('meta-filename').textContent = file.name;
+                    document.getElementById('meta-doc-name').textContent = file.name;
+                    document.getElementById('meta-dropzone').classList.add('hidden');
+                    document.getElementById('meta-options').classList.remove('hidden');
+                    hideModal();
+                } catch (err) {
+                    hideModal();
+                    showToast('Error al leer metadatos.', 'error');
+                }
+            }
+            e.target.value = '';
+        });
+
+        function resetMetadata() {
+            metaFile = null;
+            loadedPdfForMeta = null;
+            document.getElementById('meta-dropzone').classList.remove('hidden');
+            document.getElementById('meta-options').classList.add('hidden');
+        }
+
+        async function executeMetadata() {
+            if (!loadedPdfForMeta) return;
+            showModal('Guardando metadatos...', 'Actualizando archivo...');
+            try {
+                loadedPdfForMeta.setTitle(document.getElementById('meta-title').value);
+                loadedPdfForMeta.setAuthor(document.getElementById('meta-author').value);
+                loadedPdfForMeta.setSubject(document.getElementById('meta-subject').value);
+                const kw = document.getElementById('meta-keywords').value.split(',').map(s => s.trim()).filter(Boolean);
+                loadedPdfForMeta.setKeywords(kw);
+
+                const bytes = await loadedPdfForMeta.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-con-metadatos.pdf');
+                hideModal();
+                showToast('¡Metadatos actualizados con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al guardar propiedades.', 'error');
+            }
+        }
+
+
+        // ================= 23. LECTOR / VISOR INTEGRADO =================
         let readerPdfDoc = null;
         let readerPageNum = 1;
         let readerScale = 1.2;
