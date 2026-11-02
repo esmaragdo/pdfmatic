@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDFmatic.Pro · Herramientas PDF privadas en tu navegador</title>
+<style>
+:root{color-scheme:light;--bg:#f5f5f7;--solid:#fff;--ink:#1d1d1f;--mut:#6e6e73;--acc:#0071e3;--onacc:#fff;--line:rgba(0,0,0,.09);--fill:rgba(0,0,0,.04);--err:#d70015;--ok:#1a8f3c;--sh:0 2px 4px rgba(0,0,0,.04),0 18px 48px rgba(0,0,0,.09);--f:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Segoe UI",system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#000;--solid:#1c1c1e;--ink:#f5f5f7;--mut:#a1a1a6;--acc:#2997ff;--line:rgba(255,255,255,.12);--fill:rgba(255,255,255,.06);--err:#ff6961;--ok:#30d158;--sh:0 2px 4px rgba(0,0,0,.4),0 24px 64px rgba(0,0,0,.55)}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.47 var(--f);-webkit-font-smoothing:antialiased}
+button:focus-visible,select:focus-visible,input:focus-visible,#z:focus-within{outline:3px solid color-mix(in srgb,var(--acc) 55%,transparent);outline-offset:2px}
+.bar{position:sticky;top:0;z-index:5;-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line)}
+.bar .in{max-width:1080px;margin:0 auto;height:56px;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.logo em{font-style:normal;color:var(--acc)}
+.mk{width:28px;height:28px;border-radius:8px;background:linear-gradient(145deg,#4aa8ff,#5e5ce6 60%,#bf5af2);display:grid;place-items:center;color:#fff}
+.mk svg{width:16px;height:16px}
+.pill{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:7px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.hero{position:relative;isolation:isolate;text-align:center;padding:88px 22px 60px;overflow:hidden;animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+.hero::before{content:"";position:absolute;inset:-25% -10% auto;height:130%;z-index:-1;background:radial-gradient(40% 50% at 25% 30%,rgba(10,132,255,.3),transparent 70%),radial-gradient(35% 45% at 75% 25%,rgba(191,90,242,.26),transparent 70%),radial-gradient(35% 40% at 55% 72%,rgba(255,55,95,.17),transparent 70%);filter:blur(30px)}
+h1{font-weight:700;font-size:clamp(42px,8.4vw,88px);line-height:1.03;letter-spacing:-.045em;margin:0 auto 22px;background:linear-gradient(180deg,var(--ink) 35%,color-mix(in srgb,var(--ink) 60%,transparent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:clamp(18px,2.4vw,23px);line-height:1.4;color:var(--mut);max-width:34em;margin:0 auto;letter-spacing:-.01em}
+.tr{list-style:none;display:flex;gap:8px 24px;justify-content:center;flex-wrap:wrap;padding:0;margin:28px 0 0;color:var(--mut);font-size:15px}
+.tr li::before{content:"✓";color:var(--acc);font-weight:700;margin-right:7px}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+.w{max-width:1080px;margin:0 auto;padding:0 22px 36px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.tiles button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;background:var(--solid);box-shadow:0 0 0 1px var(--line);font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.25;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.tiles button:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),var(--sh)}
+.tiles button.on{box-shadow:0 0 0 2px var(--acc),var(--sh)}
+.tiles button:focus-visible{outline:3px solid color-mix(in srgb,var(--acc) 55%,transparent);outline-offset:2px}
+.ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,var(--a),var(--b));box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.ic svg{width:23px;height:23px}
+main{background:var(--solid);border-radius:28px;box-shadow:0 0 0 1px var(--line),var(--sh);padding:38px;min-width:0}
+h2{font-size:32px;line-height:1.1;letter-spacing:-.03em;margin:0 0 6px;font-weight:700}
+#d{color:var(--mut);margin:0 0 26px}
+#z{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;border:1.5px dashed var(--line);background:var(--fill);border-radius:22px;padding:44px 20px;cursor:pointer;transition:background .2s,border-color .2s}
+#z *{pointer-events:none}
+#z:hover,#z.over{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 9%,transparent)}
+#z svg{width:46px;height:46px;color:var(--acc);margin-bottom:6px}
+#z b{font-size:21px;font-weight:600;letter-spacing:-.02em}
+#z small{color:var(--mut);font-size:15px}
+#f{position:absolute;opacity:0;width:1px;height:1px}
+#l{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+#l li{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-radius:14px;background:var(--fill)}
+#l li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--acc);flex:none}
+#l span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+#l small{color:var(--mut);font-size:14px;white-space:nowrap}
+#l b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;cursor:pointer;color:var(--mut);font-weight:400;font-size:15px;user-select:none}
+#l b:hover{background:var(--line);color:var(--ink)}
+#o{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:24px 0 0}
+#o:empty{display:none}
+#o label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;color:var(--mut)}
+#o p{grid-column:1/-1;margin:0;font-size:14px;color:var(--mut)}
+input[type=text],select{font:inherit;font-size:16px;color:var(--ink);padding:11px 14px;border:0;border-radius:12px;background:var(--fill);box-shadow:inset 0 0 0 1px var(--line)}
+#go{margin-top:28px;font:600 17px var(--f);padding:14px 32px;border:0;border-radius:980px;background:var(--acc);color:var(--onacc);cursor:pointer;transition:transform .15s,filter .15s}
+#go:hover:not(:disabled){filter:brightness(1.1)}
+#go:active:not(:disabled){transform:scale(.97)}
+#go:disabled{opacity:.35;cursor:not-allowed}
+#st{margin:16px 0 0;min-height:1.5em;font-size:15px;color:var(--mut)}
+#st.e{color:var(--err)}
+#st.ok{color:var(--ok);font-weight:500}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:8px 22px 52px}
+@media(max-width:720px){.hero{padding:56px 20px 40px}.tiles{grid-template-columns:1fr 1fr}.tiles button{font-size:15px;padding:12px;gap:10px}.tiles button:last-child:nth-child(odd){grid-column:1/-1}.ic{width:38px;height:38px}main{padding:22px;border-radius:24px}h2{font-size:26px}#go{width:100%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="in">
+  <a class="logo" href="#"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>PDFmatic<em>.Pro</em></a>
+  <span class="pill">Procesa en tu dispositivo</span>
+</div></header>
+<section class="hero">
+  <h1>Tus PDF,<br>resueltos en segundos.</h1>
+  <p>Une, divide, comprime y marca tus documentos sin cuentas ni subidas. Todo ocurre dentro de tu navegador.</p>
+  <ul class="tr"><li>100 % privado</li><li>Sin registro</li><li>Gratis</li></ul>
+</section>
+<div class="w">
+  <nav id="nav" class="tiles" aria-label="Herramientas"></nav>
+  <main>
+    <h2 id="h"></h2>
+    <p id="d"></p>
+    <label id="z" for="f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5M7.5 9.5 12 5l4.5 4.5M5 15v2.5A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5V15"/></svg><b>Suelta tus archivos aquí</b><small id="zh"></small></label>
+    <input id="f" type="file">
+    <ul id="l"></ul>
+    <div id="o"></div>
+    <button id="go" disabled>Procesar y descargar</button>
+    <p id="st" role="status"></p>
+  </main>
+</div>
+<footer>PDFmatic.Pro · Tus archivos nunca salen de tu dispositivo · Hecho con pdf-lib y pdf.js</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+const {PDFDocument,StandardFonts,degrees,rgb}=PDFLib;
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const $=s=>document.querySelector(s), v=id=>document.getElementById(id).value;
+const esc=s=>s.replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const kb=n=>n>1048576?(n/1048576).toFixed(1)+' MB':Math.round(n/1024)+' KB';
+const st=(m,e)=>{$('#st').textContent=m;$('#st').className=e?'e':/^Listo/.test(m)?'ok':''};
+const load=async f=>PDFDocument.load(await f.arrayBuffer(),{ignoreEncryption:true});
+const blob=(c,t,q)=>new Promise(r=>c.toBlob(r,t,q));
+const bytes=async b=>new Uint8Array(await b.arrayBuffer());
+const pad=(i,n)=>String(i).padStart(String(n).length,'0');
+function dl(data,name,type){const b=data instanceof Blob?data:new Blob([data],{type});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5e3)}
+// "1-3, 5, 8-" -> índices base 0
+const rng=(s,n)=>{const o=[];s.split(',').forEach(p=>{p=p.trim();if(!p)return;const [a,b]=p.includes('-')?p.split('-'):[p,p];const x=+a||1,y=+b||n;for(let i=x;i<=Math.min(y,n);i++)if(i>0)o.push(i-1)});return o};
+// render de página con pdf.js
+async function canvas(pdf,i,scale){const p=await pdf.getPage(i),vp=p.getViewport({scale}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);await p.render({canvasContext:x,viewport:vp}).promise;return c}
+// ZIP sin compresión (para entregar varias páginas/imágenes en un solo archivo)
+const T32=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc=u=>{let c=-1;for(const b of u)c=T32[(c^b)&255]^(c>>>8);return(~c)>>>0};
+function zip(items){const enc=new TextEncoder(),P=[],C=[];let off=0;
+  for(const {name,data} of items){const nm=enc.encode(name),c=crc(data),n=data.length;
+    const h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,1);h.setUint16(4,20,1);h.setUint16(6,0x800,1);h.setUint32(14,c,1);h.setUint32(18,n,1);h.setUint32(22,n,1);h.setUint16(26,nm.length,1);
+    const d=new DataView(new ArrayBuffer(46));d.setUint32(0,0x02014b50,1);d.setUint16(4,20,1);d.setUint16(6,20,1);d.setUint16(8,0x800,1);d.setUint32(16,c,1);d.setUint32(20,n,1);d.setUint32(24,n,1);d.setUint16(28,nm.length,1);d.setUint32(42,off,1);
+    P.push(h.buffer,nm,data);C.push(d.buffer,nm);off+=30+nm.length+n}
+  const cs=C.reduce((s,x)=>s+x.byteLength,0),e=new DataView(new ArrayBuffer(22));
+  e.setUint32(0,0x06054b50,1);e.setUint16(8,items.length,1);e.setUint16(10,items.length,1);e.setUint32(12,cs,1);e.setUint32(16,off,1);
+  return new Blob([...P,...C,e.buffer],{type:'application/zip'})}
+
+const tools={
+merge:{n:'Unir PDF',d:'Combina varios PDF en uno solo. Usa ↑ ↓ para cambiar el orden.',a:'pdf',m:1,o:'',
+ async run(fs){const out=await PDFDocument.create();for(const f of fs){const d=await load(f);(await out.copyPages(d,d.getPageIndices())).forEach(p=>out.addPage(p))}
+  dl(await out.save(),'unido.pdf','application/pdf');st('Listo: '+fs.length+' archivos unidos.')}},
+extract:{n:'Extraer o eliminar páginas',d:'Quédate con ciertas páginas o quítalas del documento.',a:'pdf',
+ o:'<label>Páginas<input type="text" id="p" placeholder="1-3, 5, 8-"></label><label>Acción<select id="m"><option value="k">Conservar estas páginas<option value="r">Eliminar estas páginas</select></label><p>Usa números y rangos separados por comas. «8-» significa de la 8 al final.</p>',
+ async run([f]){const d=await load(f),n=d.getPageCount();let idx=rng(v('p'),n);
+  if(v('m')=='r'){const s=new Set(idx);idx=d.getPageIndices().filter(i=>!s.has(i))}
+  if(!idx.length)throw Error('Ese rango no deja ninguna página. Revisa los números.');
+  const out=await PDFDocument.create();(await out.copyPages(d,idx)).forEach(p=>out.addPage(p));
+  dl(await out.save(),'paginas.pdf','application/pdf');st('Listo: el nuevo PDF tiene '+idx.length+' páginas.')}},
+split:{n:'Dividir en páginas',d:'Separa cada página en su propio PDF y descárgalas en un ZIP.',a:'pdf',o:'',
+ async run([f]){const d=await load(f),n=d.getPageCount(),items=[];
+  for(let i=0;i<n;i++){st('Página '+(i+1)+' de '+n+'…');const o=await PDFDocument.create();o.addPage((await o.copyPages(d,[i]))[0]);items.push({name:`pagina-${pad(i+1,n)}.pdf`,data:await o.save()})}
+  dl(zip(items),'paginas.zip');st('Listo: '+n+' PDF en el ZIP.')}},
+rotate:{n:'Rotar páginas',d:'Gira todo el documento o solo las páginas que elijas.',a:'pdf',
+ o:'<label>Giro<select id="a"><option value="90">90° a la derecha<option value="180">180°<option value="270">90° a la izquierda</select></label><label>Páginas (vacío = todas)<input type="text" id="p" placeholder="1-3, 5"></label>',
+ async run([f]){const d=await load(f),n=d.getPageCount(),s=v('p').trim(),set=new Set(s?rng(s,n):d.getPageIndices());
+  d.getPages().forEach((p,i)=>{if(set.has(i))p.setRotation(degrees((p.getRotation().angle+ +v('a'))%360))});
+  dl(await d.save(),'rotado.pdf','application/pdf');st('Listo: '+set.size+' páginas giradas.')}},
+img2pdf:{n:'Imágenes a PDF',d:'Convierte fotos o capturas en un PDF, una por página. Usa ↑ ↓ para ordenarlas.',a:'image/*',m:1,
+ o:'<label>Tamaño de página<select id="s"><option value="i">Igual que la imagen<option value="a">A4 con márgenes</select></label>',
+ async run(fs){const d=await PDFDocument.create(),A=v('s')=='a';
+  for(const f of fs){let im;
+   if(f.type=='image/png')im=await d.embedPng(await bytes(f));
+   else{const bm=await createImageBitmap(f),c=document.createElement('canvas');c.width=bm.width;c.height=bm.height;c.getContext('2d').drawImage(bm,0,0);im=await d.embedJpg(await bytes(await blob(c,'image/jpeg',.92)))}
+   const W=im.width,H=im.height;
+   if(A){const pw=595,ph=842,k=Math.min((pw-56)/W,(ph-56)/H),p=d.addPage([pw,ph]);p.drawImage(im,{x:(pw-W*k)/2,y:(ph-H*k)/2,width:W*k,height:H*k})}
+   else d.addPage([W,H]).drawImage(im,{x:0,y:0,width:W,height:H})}
+  dl(await d.save(),'imagenes.pdf','application/pdf');st('Listo: '+fs.length+' imágenes en el PDF.')}},
+pdf2img:{n:'PDF a imágenes',d:'Convierte cada página en una imagen y descárgalas en un ZIP.',a:'pdf',
+ o:'<label>Formato<select id="t"><option value="image/jpeg">JPG<option value="image/png">PNG</select></label><label>Resolución<select id="r"><option value="1.5">Normal<option value="2">Alta<option value="3">Muy alta</select></label>',
+ async run([f]){const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,n=pdf.numPages,t=v('t'),ext=t=='image/png'?'png':'jpg',items=[];
+  for(let i=1;i<=n;i++){st('Página '+i+' de '+n+'…');items.push({name:`pagina-${pad(i,n)}.${ext}`,data:await bytes(await blob(await canvas(pdf,i,+v('r')),t,.92))})}
+  dl(zip(items),'imagenes.zip');st('Listo: '+n+' imágenes en el ZIP.')}},
+compress:{n:'Comprimir PDF',d:'Reduce el peso convirtiendo cada página en una imagen optimizada.',a:'pdf',
+ o:'<label>Nivel<select id="q"><option value="1,.5">Máxima compresión<option value="1.4,.7" selected>Equilibrado<option value="2,.85">Poca compresión</select></label><p>Este método rasteriza las páginas: el texto deja de poder seleccionarse o buscarse. Si el resultado pesa más que el original, conserva el original.</p>',
+ async run([f]){const [sc,q]=v('q').split(',').map(Number),pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,out=await PDFDocument.create();
+  for(let i=1;i<=pdf.numPages;i++){st('Página '+i+' de '+pdf.numPages+'…');const c=await canvas(pdf,i,sc),im=await out.embedJpg(await bytes(await blob(c,'image/jpeg',q))),w=c.width/sc,h=c.height/sc;out.addPage([w,h]).drawImage(im,{x:0,y:0,width:w,height:h})}
+  const r=await out.save();dl(r,'comprimido.pdf','application/pdf');st('Listo: de '+kb(f.size)+' a '+kb(r.length)+'.')}},
+mark:{n:'Marca de agua',d:'Estampa un texto diagonal en todas las páginas.',a:'pdf',
+ o:'<label>Texto<input type="text" id="t" value="CONFIDENCIAL"></label><label>Opacidad<select id="o"><option value=".15">Suave<option value=".3" selected>Media<option value=".55">Fuerte</select></label>',
+ async run([f]){const d=await load(f),F=await d.embedFont(StandardFonts.HelveticaBold),t=v('t').trim()||'CONFIDENCIAL',k=.7071;
+  d.getPages().forEach(p=>{const {width:w,height:h}=p.getSize(),s=Math.min(90,Math.hypot(w,h)*.7/F.widthOfTextAtSize(t,1)),tw=F.widthOfTextAtSize(t,s);
+   p.drawText(t,{x:w/2-k*(tw/2-.35*s),y:h/2-k*(tw/2+.35*s),size:s,font:F,color:rgb(.45,.45,.45),opacity:+v('o'),rotate:degrees(45)})});
+  dl(await d.save(),'marca-de-agua.pdf','application/pdf');st('Listo: marca aplicada.')}},
+nums:{n:'Numerar páginas',d:'Agrega el número de página al pie de cada hoja.',a:'pdf',
+ o:'<label>Posición<select id="pos"><option value="c">Centro<option value="r">Derecha<option value="l">Izquierda</select></label><label>Formato<select id="fm"><option value="1">1<option value="2">1 / 10<option value="3">Página 1 de 10</select></label>',
+ async run([f]){const d=await load(f),F=await d.embedFont(StandardFonts.Helvetica),n=d.getPageCount(),fm=v('fm'),pos=v('pos');
+  d.getPages().forEach((p,i)=>{const w=p.getSize().width,t=fm=='1'?`${i+1}`:fm=='2'?`${i+1} / ${n}`:`Página ${i+1} de ${n}`,tw=F.widthOfTextAtSize(t,10);
+   p.drawText(t,{x:pos=='l'?32:pos=='r'?w-32-tw:(w-tw)/2,y:22,size:10,font:F,color:rgb(.2,.2,.2)})});
+  dl(await d.save(),'numerado.pdf','application/pdf');st('Listo: '+n+' páginas numeradas.')}}
+};
+
+let cur,files=[];
+const SV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">';
+const IC={
+merge:['<rect x="3" y="8" width="12" height="13" rx="2"/><path d="M9 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/>','#0a84ff','#5e5ce6'],
+extract:['<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/>','#30d158','#00c7be'],
+split:['<rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/>','#ff9f0a','#ff6a00'],
+rotate:['<path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/>','#bf5af2','#8e44ad'],
+img2pdf:['<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-8 8"/>','#ff375f','#ff6482'],
+pdf2img:['<path d="M12 4v11M7 11l5 5 5-5M4 20h16"/>','#64d2ff','#0a84ff'],
+compress:['<path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>','#ff453a','#ff9f0a'],
+mark:['<path d="M12 3s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.200 12 3 12 3z"/>','#5e5ce6','#bf5af2'],
+nums:['<path d="M9 3 7 21M17 3l-2 18M4 9h17M3 15h17"/>','#8e8e93','#636366']};
+const nav=()=>$('#nav').innerHTML=Object.entries(tools).map(([k,t])=>{const c=IC[k];return `<button data-k="${k}" class="${k==cur?'on':''}"><span class="ic" style="--a:${c[1]};--b:${c[2]}">${SV}${c[0]}</svg></span>${t.n}</button>`}).join('');
+function pick(k){cur=k;files=[];const t=tools[k];$('#h').textContent=t.n;$('#d').textContent=t.d;$('#o').innerHTML=t.o;$('#zh').textContent='o haz clic para elegir '+(t.a=='pdf'?(t.m?'tus PDF':'un PDF'):'tus imágenes');const f=$('#f');f.value='';f.accept=t.a=='pdf'?'application/pdf,.pdf':t.a;f.multiple=!!t.m;st('');list();nav()}
+function list(){$('#l').innerHTML=files.map((f,i)=>`<li><span>${esc(f.name)}</span><small>${kb(f.size)}${f.pg?' · '+f.pg+' págs':''}</small>${tools[cur].m?`<b data-a="u" data-i="${i}" title="Subir">↑</b><b data-a="d" data-i="${i}" title="Bajar">↓</b>`:''}<b data-a="x" data-i="${i}" title="Quitar">✕</b></li>`).join('');$('#go').disabled=!files.length}
+function add(fl){const t=tools[cur];if(!t.m)files=[];
+  for(const f of fl){const ok=t.a=='pdf'?(f.type=='application/pdf'||/\.pdf$/i.test(f.name)):f.type.startsWith('image/');
+    if(!ok){st('«'+f.name+'» no es un archivo compatible con esta herramienta.',1);continue}
+    files.push(f);
+    if(t.a=='pdf')load(f).then(d=>{f.pg=d.getPageCount();list()}).catch(()=>{})}
+  list()}
+$('#nav').onclick=e=>{const k=e.target.closest('button')?.dataset.k;if(k){pick(k);if(innerWidth<720)$('main').scrollIntoView({behavior:'smooth'})}};
+$('#f').onchange=e=>{st('');add(e.target.files);e.target.value=''};
+$('#l').onclick=e=>{const {a,i}=e.target.dataset;if(!a)return;const n=+i;
+  if(a=='x')files.splice(n,1);
+  else{const j=a=='u'?n-1:n+1;if(j>=0&&j<files.length)[files[n],files[j]]=[files[j],files[n]]}list()};
+const z=$('#z');
+['dragenter','dragover'].forEach(ev=>z.addEventListener(ev,e=>{e.preventDefault();z.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>z.addEventListener(ev,e=>{e.preventDefault();z.classList.remove('over')}));
+z.addEventListener('drop',e=>{st('');add(e.dataTransfer.files)});
+$('#go').onclick=async()=>{const b=$('#go');b.disabled=true;st('Procesando…');
+  try{await tools[cur].run(files)}catch(e){console.error(e);st('No se pudo procesar: '+(e.message||e),1)}
+  b.disabled=!files.length};
+pick('merge');
+</script>
+</body>
+</html>
