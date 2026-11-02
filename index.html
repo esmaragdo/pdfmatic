@@ -2160,18 +2160,10 @@
             try {
                 const arrayBuffer = await w2pFile.arrayBuffer();
                 const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-                const htmlContent = `
-                    <!DOCTYPE html>
-                    <html>
-                    <head><meta charset="utf-8"><style>body { font-family: sans-serif; padding: 40px; color: #1d1d1f; }</style></head>
-                    <body>${result.value}</body>
-                    </html>
-                `;
                 const pdfDoc = await PDFLib.PDFDocument.create();
                 const page = pdfDoc.addPage([600, 800]);
                 page.drawText('Documento Word convertido (Versión Texto)', { x: 50, y: 750, size: 16, color: PDFLib.rgb(0,0,0) });
                 
-                // Extraer texto limpio de mammoth para incrustar en PDF
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = result.value;
                 const text = tempDiv.textContent || tempDiv.innerText || "";
@@ -2662,7 +2654,7 @@
         }
 
 
-        // ================= 18. PROTEGER CON CONTRASEÑA =================
+        // ================= 18. PROTEGER CON CONTRASEÑA (CORREGIDA) =================
         let protFile = null;
         document.getElementById('prot-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -2689,21 +2681,33 @@
                 showToast('Introduce una contraseña válida.', 'error');
                 return;
             }
-            showModal('Protegiendo PDF...', 'Cifrando documento...');
+            showModal('Protegiendo PDF...', 'Cifrando documento de forma segura...');
             try {
                 const buf = await protFile.arrayBuffer();
-                const pdf = await PDFLib.PDFDocument.load(buf);
+                const pdf = await PDFLib.PDFDocument.load(buf, { ignoreEncryption: true });
+                
                 pdf.encrypt({
                     userPassword: password,
                     ownerPassword: password,
+                    permissions: {
+                        printing: 'highResolution',
+                        modifying: false,
+                        copying: false,
+                        annotating: false,
+                        fillingForms: false,
+                        contentAccessibility: true,
+                        documentAssembly: false,
+                    }
                 });
+
                 const bytes = await pdf.save();
                 downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-protegido.pdf');
                 hideModal();
                 showToast('¡PDF protegido con contraseña con éxito!');
             } catch (err) {
+                console.error(err);
                 hideModal();
-                showToast('Error al proteger el PDF.', 'error');
+                showToast('Error al cifrar el documento. Asegúrate de que el PDF no esté dañado.', 'error');
             }
         }
 
