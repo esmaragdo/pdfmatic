@@ -22,6 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <!-- SheetJS (xlsx) for Excel conversion -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- jsPDF for encryption and safe PDF saving -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -123,7 +125,7 @@
                 </p>
             </div>
 
-            <!-- Category 1: Organizar y Estructurar -->
+            <!-- Category 1: Organizar y Estructurar (6 herramientas) -->
             <div class="space-y-6">
                 <div class="border-b border-apple-border/60 pb-3 flex items-center space-x-2">
                     <i data-lucide="folder-kanban" class="w-5 h-5 text-apple-accent"></i>
@@ -216,11 +218,11 @@
                 </div>
             </div>
 
-            <!-- Category 2: Conversión Avanzada -->
+            <!-- Category 2: Conversión Avanzada (7 herramientas) -->
             <div class="space-y-6 pt-6">
                 <div class="border-b border-apple-border/60 pb-3 flex items-center space-x-2">
                     <i data-lucide="refresh-cw" class="w-5 h-5 text-amber-600"></i>
-                    <h2 class="text-xl font-semibold text-apple-dark">2. Conversión Avanzada (Word, Excel e Imágenes)</h2>
+                    <h2 class="text-xl font-semibold text-apple-dark">2. Conversión Avanzada</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div onclick="switchView('pdf2img')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
@@ -323,7 +325,7 @@
                 </div>
             </div>
 
-            <!-- Category 3: Edición y Enriquecimiento -->
+            <!-- Category 3: Edición y Enriquecimiento (6 herramientas) -->
             <div class="space-y-6 pt-6">
                 <div class="border-b border-apple-border/60 pb-3 flex items-center space-x-2">
                     <i data-lucide="edit-3" class="w-5 h-5 text-emerald-600"></i>
@@ -385,10 +387,38 @@
                             <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                         </div>
                     </div>
+                    
+                    <div onclick="switchView('flatten')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="align-vertical-space-around" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Aplanar Formularios</h3>
+                            <p class="text-apple-subtle text-sm">Congela campos interactivos y firmas para que no puedan ser editados nuevamente.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-orange-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="switchView('insert-page')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="file-plus-2" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Insertar Página Blanca</h3>
+                            <p class="text-apple-subtle text-sm">Añade rápidamente una página en blanco al inicio o al final de tu documento.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-teal-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Category 4: Seguridad, Extracción y Lectura -->
+            <!-- Category 4: Seguridad, Extracción y Lectura (7 herramientas) -->
             <div class="space-y-6 pt-6">
                 <div class="border-b border-apple-border/60 pb-3 flex items-center space-x-2">
                     <i data-lucide="shield" class="w-5 h-5 text-indigo-600"></i>
@@ -460,6 +490,20 @@
                             <p class="text-apple-subtle text-sm">Modifica el título, autor, asunto y palabras clave incrustadas en el PDF.</p>
                         </div>
                         <div class="mt-6 flex items-center text-sm font-medium text-amber-600 group-hover:translate-x-1 transition-transform">
+                            <span>Abrir herramienta</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="switchView('repair')" class="group bg-white p-6 rounded-2xl border border-apple-border/80 apple-shadow hover:apple-shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="wrench" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-apple-dark mb-1">Reparar PDF</h3>
+                            <p class="text-apple-subtle text-sm">Reconstruye tablas de referencia cruzada rotas y arregla documentos corruptos.</p>
+                        </div>
+                        <div class="mt-6 flex items-center text-sm font-medium text-rose-600 group-hover:translate-x-1 transition-transform">
                             <span>Abrir herramienta</span>
                             <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                         </div>
@@ -1201,8 +1245,91 @@
                 </div>
             </div>
         </div>
+        
+        <!-- ================= 24. VIEW: APLANAR FORMULARIOS ================= -->
+        <div id="view-flatten" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Aplanar Formularios</h2>
+                <p class="text-apple-subtle text-sm">Convierte campos de texto interactivos, checkboxes y firmas en elementos gráficos fijos para que nadie pueda modificarlos posteriormente.</p>
+            </div>
+            <div id="flatten-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-orange-500 transition-all cursor-pointer relative">
+                <input type="file" id="flatten-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="align-vertical-space-around" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="flatten-filename">Sube un archivo PDF con formularios</h4>
+                <p class="text-xs text-apple-subtle">Congelamiento seguro de campos</p>
+            </div>
+            <div id="flatten-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="flatten-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Listo para aplanar todos los campos</p>
+                    </div>
+                    <button onclick="resetFlatten()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeFlatten()" class="px-6 py-3 rounded-full bg-orange-600 text-white font-medium hover:bg-orange-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="align-vertical-space-around" class="w-4 h-4"></i>
+                        <span>Aplanar Documento y Descargar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        <!-- ================= 18. VIEW: PROTEGER CON CONTRASEÑA ================= -->
+        <!-- ================= 26. VIEW: INSERTAR PÁGINA EN BLANCO ================= -->
+        <div id="view-insert-page" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Insertar Página en Blanco</h2>
+                <p class="text-apple-subtle text-sm">Añade una página completamente limpia al principio o al final de tu documento PDF.</p>
+            </div>
+            <div id="insert-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-teal-500 transition-all cursor-pointer relative">
+                <input type="file" id="insert-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="file-plus-2" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="insert-filename">Sube un archivo PDF</h4>
+                <p class="text-xs text-apple-subtle">Inserción rápida y limpia</p>
+            </div>
+            <div id="insert-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="insert-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Selecciona dónde añadir la página</p>
+                    </div>
+                    <button onclick="resetInsertPage()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="space-y-3">
+                    <label class="block text-sm font-medium text-apple-dark">Posición de la página nueva</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="border border-apple-border p-4 rounded-xl cursor-pointer hover:border-teal-500 text-center bg-apple-bg/50">
+                            <input type="radio" name="insert-pos" value="start" class="mb-1 text-teal-600 focus:ring-teal-500">
+                            <span class="font-medium text-sm text-apple-dark block">Al Principio (Portada)</span>
+                        </label>
+                        <label class="border border-apple-border p-4 rounded-xl cursor-pointer hover:border-teal-500 text-center bg-apple-bg/50">
+                            <input type="radio" name="insert-pos" value="end" checked class="mb-1 text-teal-600 focus:ring-teal-500">
+                            <span class="font-medium text-sm text-apple-dark block">Al Final (Contraportada)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeInsertPage()" class="px-6 py-3 rounded-full bg-teal-600 text-white font-medium hover:bg-teal-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="file-plus-2" class="w-4 h-4"></i>
+                        <span>Añadir Página y Descargar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 18. VIEW: PROTEGER CON CONTRASEÑA (CORREGIDA CON JSPDF) ================= -->
         <div id="view-protect" class="view-section hidden space-y-6">
             <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -1210,7 +1337,7 @@
             </button>
             <div class="space-y-1">
                 <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Proteger PDF con Contraseña</h2>
-                <p class="text-apple-subtle text-sm">Cifra tu documento para impedir accesos no autorizados.</p>
+                <p class="text-apple-subtle text-sm">Cifra tu documento para impedir accesos no autorizados mediante estándar robusto 128-bit.</p>
             </div>
             <div id="prot-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-red-500 transition-all cursor-pointer relative">
                 <input type="file" id="prot-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
@@ -1404,6 +1531,41 @@
                     <button onclick="executeMetadata()" class="px-6 py-3 rounded-full bg-amber-600 text-white font-medium hover:bg-amber-700 transition-all shadow-md flex items-center space-x-2">
                         <i data-lucide="info" class="w-4 h-4"></i>
                         <span>Guardar Propiedades y Descargar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ================= 25. VIEW: REPARAR PDF ================= -->
+        <div id="view-repair" class="view-section hidden space-y-6">
+            <button onclick="switchView('home')" class="text-xs font-semibold text-apple-subtle hover:text-apple-dark flex items-center space-x-1 mb-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Volver al inicio</span>
+            </button>
+            <div class="space-y-1">
+                <h2 class="text-3xl font-bold tracking-tight text-apple-dark">Reparar PDF Corrupto</h2>
+                <p class="text-apple-subtle text-sm">Intenta reconstruir la estructura y tablas rotas de documentos PDF ilegibles.</p>
+            </div>
+            <div id="repair-dropzone" class="border-2 border-dashed border-apple-border rounded-2xl p-10 text-center bg-white apple-shadow hover:border-rose-500 transition-all cursor-pointer relative">
+                <input type="file" id="repair-file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="w-16 h-16 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="wrench" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-apple-dark mb-1" id="repair-filename">Sube un archivo PDF dañado</h4>
+                <p class="text-xs text-apple-subtle">Reconstrucción forzada</p>
+            </div>
+            <div id="repair-options" class="hidden bg-white p-6 rounded-2xl border border-apple-border apple-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-apple-border pb-4">
+                    <div>
+                        <h3 class="font-semibold text-apple-dark" id="repair-doc-name">documento.pdf</h3>
+                        <p class="text-xs text-apple-subtle">Listo para intentar reparación</p>
+                    </div>
+                    <button onclick="resetRepair()" class="text-xs text-apple-subtle hover:text-apple-dark">Cambiar archivo</button>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button onclick="executeRepair()" class="px-6 py-3 rounded-full bg-rose-600 text-white font-medium hover:bg-rose-700 transition-all shadow-md flex items-center space-x-2">
+                        <i data-lucide="wrench" class="w-4 h-4"></i>
+                        <span>Reparar Documento y Descargar</span>
                     </button>
                 </div>
             </div>
@@ -2652,9 +2814,134 @@
                 showToast('Error al firmar el documento.', 'error');
             }
         }
+        
+        
+        // ================= 24. APLANAR FORMULARIOS =================
+        let flattenFile = null;
+        document.getElementById('flatten-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                flattenFile = file;
+                document.getElementById('flatten-filename').textContent = file.name;
+                document.getElementById('flatten-doc-name').textContent = file.name;
+                document.getElementById('flatten-dropzone').classList.add('hidden');
+                document.getElementById('flatten-options').classList.remove('hidden');
+            }
+            e.target.value = '';
+        });
+
+        function resetFlatten() {
+            flattenFile = null;
+            document.getElementById('flatten-dropzone').classList.remove('hidden');
+            document.getElementById('flatten-options').classList.add('hidden');
+        }
+
+        async function executeFlatten() {
+            if (!flattenFile) return;
+            showModal('Aplanando PDF...', 'Congelando campos...');
+            try {
+                const buf = await flattenFile.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(buf);
+                const form = pdf.getForm();
+                form.flatten();
+                const bytes = await pdf.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-aplanado.pdf');
+                hideModal();
+                showToast('¡Formularios aplanados con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al aplanar. Asegúrate de que tenga formularios activos.', 'error');
+            }
+        }
+        
+        
+        // ================= 25. REPARAR PDF =================
+        let repairFile = null;
+        document.getElementById('repair-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                repairFile = file;
+                document.getElementById('repair-filename').textContent = file.name;
+                document.getElementById('repair-doc-name').textContent = file.name;
+                document.getElementById('repair-dropzone').classList.add('hidden');
+                document.getElementById('repair-options').classList.remove('hidden');
+            }
+            e.target.value = '';
+        });
+
+        function resetRepair() {
+            repairFile = null;
+            document.getElementById('repair-dropzone').classList.remove('hidden');
+            document.getElementById('repair-options').classList.add('hidden');
+        }
+
+        async function executeRepair() {
+            if (!repairFile) return;
+            showModal('Reparando PDF...', 'Reconstruyendo índices y metadatos...');
+            try {
+                const buf = await repairFile.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(buf, { ignoreEncryption: true, throwOnInvalidObject: false });
+                const bytes = await pdf.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-reparado.pdf');
+                hideModal();
+                showToast('¡PDF reparado con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('El documento está demasiado dañado para repararse.', 'error');
+            }
+        }
+        
+        
+        // ================= 26. INSERTAR PÁGINA EN BLANCO =================
+        let insertFile = null;
+        document.getElementById('insert-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                insertFile = file;
+                document.getElementById('insert-filename').textContent = file.name;
+                document.getElementById('insert-doc-name').textContent = file.name;
+                document.getElementById('insert-dropzone').classList.add('hidden');
+                document.getElementById('insert-options').classList.remove('hidden');
+            }
+            e.target.value = '';
+        });
+
+        function resetInsertPage() {
+            insertFile = null;
+            document.getElementById('insert-dropzone').classList.remove('hidden');
+            document.getElementById('insert-options').classList.add('hidden');
+        }
+
+        async function executeInsertPage() {
+            if (!insertFile) return;
+            const pos = document.querySelector('input[name="insert-pos"]:checked').value;
+            showModal('Insertando...', 'Añadiendo página en blanco...');
+            try {
+                const buf = await insertFile.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(buf);
+                
+                const pages = pdf.getPages();
+                let refPage = pos === 'start' ? pages[0] : pages[pages.length - 1];
+                const size = refPage ? refPage.getSize() : { width: 595.28, height: 841.89 };
+                
+                if (pos === 'start') {
+                    pdf.insertPage(0, [size.width, size.height]);
+                } else {
+                    pdf.addPage([size.width, size.height]);
+                }
+                
+                const bytes = await pdf.save();
+                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-con-pagina.pdf');
+                hideModal();
+                showToast('¡Página en blanco insertada con éxito!');
+            } catch (err) {
+                hideModal();
+                showToast('Error al insertar la página.', 'error');
+            }
+        }
 
 
-        // ================= 18. PROTEGER CON CONTRASEÑA (CORREGIDA) =================
+        // ================= 18. PROTEGER CON CONTRASEÑA (ACTUALIZADA Y CORREGIDA) =================
         let protFile = null;
         document.getElementById('prot-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -2683,31 +2970,44 @@
             }
             showModal('Protegiendo PDF...', 'Cifrando documento de forma segura...');
             try {
-                const buf = await protFile.arrayBuffer();
-                const pdf = await PDFLib.PDFDocument.load(buf, { ignoreEncryption: true });
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ unit: 'pt', format: 'a4' });
                 
-                pdf.encrypt({
+                const buf = await protFile.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+                
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    const ctx = canvas.getContext('2d');
+                    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+                    
+                    const imgData = canvas.toDataURL('image/jpeg', 0.85);
+                    
+                    if (i === 1) {
+                        doc.deletePage(1); 
+                    }
+                    
+                    doc.addPage([viewport.width, viewport.height], viewport.width > viewport.height ? 'landscape' : 'portrait');
+                    doc.addImage(imgData, 'JPEG', 0, 0, viewport.width, viewport.height);
+                }
+                
+                doc.setEncryption({
                     userPassword: password,
                     ownerPassword: password,
-                    permissions: {
-                        printing: 'highResolution',
-                        modifying: false,
-                        copying: false,
-                        annotating: false,
-                        fillingForms: false,
-                        contentAccessibility: true,
-                        documentAssembly: false,
-                    }
+                    userPermissions: ["print"]
                 });
-
-                const bytes = await pdf.save();
-                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'documento-protegido.pdf');
+                
+                doc.save('documento-protegido.pdf');
                 hideModal();
                 showToast('¡PDF protegido con contraseña con éxito!');
             } catch (err) {
                 console.error(err);
                 hideModal();
-                showToast('Error al cifrar el documento. Asegúrate de que el PDF no esté dañado.', 'error');
+                showToast('Error al cifrar el documento.', 'error');
             }
         }
 
